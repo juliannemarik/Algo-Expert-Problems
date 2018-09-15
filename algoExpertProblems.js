@@ -42,7 +42,3 @@ function twoNumberSum(array, targetSum) {
   return [];
 }
 
-
-console.log(twoNumberSum([2, 0, -5, 25, 9, 10, -2, 15], 11))
-
-

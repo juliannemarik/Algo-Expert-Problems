@@ -70,7 +70,7 @@ function findClosestValueInBst(tree, target) {
 
 // SOLUTION 2 - recursive solution:
 // average case: O(log(n)) time || O(log(n)) space
-// worst case: O(n) time || O(n) space
+// worst case: O(n) time || O(n) space - when BST is essentially a linked list
 let closestValue = Infinity;
 function findClosestValueInBst(tree, target){
   closestValue = Math.abs(target - tree.value) < Math.abs(target - closestValue) ? tree.value : closestValue;

@@ -81,3 +81,82 @@ function findClosestValueInBst(tree, target){
   }
   return findClosestValueInBst(tree[direction], target);
 }
+
+
+/*
+QUESTION 3: DEPTH-FIRST- SEARCH - LEVEL: EASY
+----------------------------------------------------
+Implement the depthFirstSearch method on the Node class, which takes in an empty array, traverses the tree using the Depth-first Search approach, stores all the Nodes' names in the input array , and returns it
+*/
+
+class Node {
+  constructor(name) {
+    this.name = name;
+    this.children = [];
+  }
+
+  addChild(name) {
+    this.children.push(new Node(name));
+    return this;
+  }
+
+  depthFirstSearch(array) {
+    array.push(this.name);
+    if (!this.children.length) {
+      return array;
+    } else {
+      for (let i = 0; i < this.children.length; i++){
+        (this.children[i]).depthFirstSearch(array)
+      }
+    }
+    return array;
+  }
+}
+
+
+/*
+QUESTION 4: NTH FIBONACCI - LEVEL: EASY
+----------------------------------------------------
+Write a function that takes in an integer n and returns the nth Fibonacci number
+Fibonacci sequence: 0, 1, 1, 2, 3, 5, 8, 13
+*/
+
+// SOLUTION 1 - recursive solution & no memoization:
+// average case:  O(2^n) time ||  O(n) space
+
+function fibonacci(n) {
+  if (n === 1 || n === 2) return n - 1;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+// SOLUTION 2 - recursive solution with memoization:
+// average case:  O(n) time ||  O(n) space
+function fibonacci(n, memoizationObj = {}) {
+  if (n in memoizationObj) return memoizationObj[n];
+  else if (n === 1 || n === 2) return n - 1;
+  else {
+    memoizationObj[n] = fibonacci(n - 1, memoizationObj) + fibonacci(n - 2, memoizationObj);
+    return memoizationObj[n];
+  }
+}
+
+// SOLUTION 3 - iterative solution with memoization
+// average case: O(n) time || O(space
+
+function fibonacci(n) {
+  let memoizationObj = {1: 0, 2: 1};
+  for (let i = 3; i <= n; i++){
+    memoizationObj[i] = memoizationObj[i - 1] + memoizationObj[i - 2];
+  }
+  return memoizationObj[n];
+}
+
+// function fibonacci(n) {
+//   const lastTwo = [0, 1];
+//   for (let i = 3; i < n; i++){
+//     lastTwo[0] = lastTwo[0] + lastTwo[1];
+//   }
+//   return lastTwo[0] + lastTwo[1];
+// }
+
+// fibonacci(6);
